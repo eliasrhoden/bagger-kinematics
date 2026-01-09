@@ -1,0 +1,101 @@
+<?xml version="1.0" ?>
+<robot name="rototilt">
+  
+  <mujoco>
+    <compiler meshdir="meshes/" balanceinertia="true" discardvisual="false"/>
+  </mujoco>
+
+  <!-- Base link (Sticka - the arm stick) -->
+  <link name="base_link">
+  <inertial>
+    <origin xyz="0 0 0" rpy="0 0 0"/>
+    <mass value="1"/>
+    <inertia ixx="1" iyy="1" izz="1" ixy="0.0" iyz="0.0" ixz="0.0"/>
+  </inertial>
+    <visual>
+      <origin xyz="0 0 0" rpy="1.5708 0 -1.5708"/>
+      <geometry>
+        <mesh filename="Sticka.stl" scale="0.001 0.001 0.001"/>
+      </geometry>
+      <material name="gray">
+        <color rgba="0.5 0.5 0.5 1.0"/>
+      </material>
+    </visual>
+  </link>
+
+  <link name="pitch_link">
+    <inertial>
+    <origin xyz="0 0 0" rpy="0 0 0"/>
+    <mass value="1"/>
+    <inertia ixx="1" iyy="1" izz="1" ixy="0.0" iyz="0.0" ixz="0.0"/>
+  </inertial>
+    <visual>
+      <origin xyz="0 0 0" rpy="1.5708 0 -1.5708"/>
+      <geometry>
+        <mesh filename="Base.stl" scale="0.001 0.001 0.001"/>
+      </geometry>
+      <material name="gray">
+        <color rgba="0.5 0.5 0.5 1.0"/>
+      </material>
+    </visual>
+  </link>
+
+
+  <link name="tilt_link">
+    <inertial>
+    <origin xyz="0 0 0" rpy="0 0 0"/>
+    <mass value="1"/>
+    <inertia ixx="1" iyy="1" izz="1" ixy="0.0" iyz="0.0" ixz="0.0"/>
+  </inertial>
+    <visual>
+      <origin xyz="0 0 0" rpy="1.5708 0 -1.5708"/>
+      <geometry>
+        <mesh filename="Tilt.stl" scale="0.001 0.001 0.001"/>
+      </geometry>
+      <material name="gray">
+        <color rgba="0.5 0.5 0.5 1.0"/>
+      </material>
+    </visual>
+  </link>
+
+  <link name="rotator_link">
+    <inertial>
+    <origin xyz="0 0 0" rpy="0 0 0"/>
+    <mass value="1"/>
+    <inertia ixx="1" iyy="1" izz="1" ixy="0.0" iyz="0.0" ixz="0.0"/>
+  </inertial>
+    <visual>
+      <origin xyz="0 0 0" rpy="1.5708 0 -1.5708"/>
+      <geometry>
+        <mesh filename="Rotator.stl" scale="0.001 0.001 0.001"/>
+      </geometry>
+      <material name="gray">
+        <color rgba="0.5 0.5 0.5 1.0"/>
+      </material>
+    </visual>
+  </link>
+
+
+  <!-- Pitch joint (bucket pitch) -->
+  <joint name="pitch_joint" type="revolute">
+    <parent link="base_link"/>
+    <child link="pitch_link"/>
+    <origin xyz="0 0 0" rpy="0 0 0"/>
+    <axis xyz="1 0 0"/>
+  </joint>
+
+  <joint name="tilt_joint" type="revolute">
+    <parent link="pitch_link"/>
+    <child link="tilt_link"/>
+    <origin xyz="-0.025 0.025 -0.062" rpy="0 0 0"/>
+    <axis xyz="0 1 0"/>
+  </joint>
+
+  <joint name="rotate_joint" type="revolute">
+    <parent link="tilt_link"/>
+    <child link="rotator_link"/>
+    <origin xyz="0 0.05 -0.057" rpy="0 0 0"/>
+    <axis xyz="0 0 1"/>
+  </joint>
+
+</robot>
