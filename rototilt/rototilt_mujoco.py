@@ -27,10 +27,6 @@ def read_3_angs_xbox():
 
     left_x, left_y, right_x, right_y = xbox.read_value()
 
-    #des_rot = right_x
-    #des_pith = right_y 
-    #des_tilt = left_x
-
     des_rot = left_x
     des_pith = right_y 
     des_tilt = right_x*-1
