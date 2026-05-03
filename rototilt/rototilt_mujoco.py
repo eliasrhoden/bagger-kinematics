@@ -60,7 +60,7 @@ with mujoco.viewer.launch_passive(m, d) as viewer:
     q[1] = np.deg2rad(0)    # Tilt
     q[2] = np.deg2rad(0)    # Rotation
 
-    while viewer.is_running() and time.time() - start < 120:
+    while viewer.is_running() and time.time() - start < 1337:
         step_start = time.time()
 
         # Only run the fwd kinematics in mujoco
