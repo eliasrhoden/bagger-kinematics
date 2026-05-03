@@ -1,3 +1,7 @@
+
+
+
+
 # Bagger kinematics
 
 This contains two simulations, one for only the bucket and rototilt and the second for a complete excavator (including rototilt).
@@ -16,6 +20,8 @@ The model kinematics are handles with *screw theory* [https://en.wikipedia.org/w
 The urdf-file was put together manually and also the kinematic-screw model in `rotoscrews.py`
 
 The user inputs a desired pitch/tilt in *bucket-frame* and also a *global rotation*. Thus can you rotate the bucket without spilling.
+
+![https://github.com/user-attachments/assets/27518317-51de-498c-8b93-5ab314ff5605](https://github.com/user-attachments/assets/27518317-51de-498c-8b93-5ab314ff5605)
 
 ## Bagger 
 
