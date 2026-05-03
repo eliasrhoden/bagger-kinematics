@@ -2,7 +2,7 @@ import modern_robotics as mr
 import numpy as np
 from mr_urdf_loader import loadURDF
 
-urdf_name = "./bagger_kinematics_no_stls.urdf"
+urdf_name = r"bagger\bagger_kinematics_no_STLs.urdf"
 mr_URDF=loadURDF(urdf_name)
 
 

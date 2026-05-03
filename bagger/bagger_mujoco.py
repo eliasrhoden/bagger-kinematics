@@ -7,9 +7,14 @@ import numpy as np
 import bagger_kinematics
 import read_xbox
 
+# Window to show ctrl-inputs
+import tkinter as tk
+root = tk.Tk()
+label = tk.Label(root, text="", font=("Courier", 16))
+label.pack()
 
 
-m = mujoco.MjModel.from_xml_path("bagger_kinematics_3.urdf")
+m = mujoco.MjModel.from_xml_path(r"bagger\bagger_kinematics_3.urdf")
 d:mujoco.MjData = mujoco.MjData(m)
 
 xbox = read_xbox.Xbox()
@@ -87,6 +92,8 @@ with mujoco.viewer.launch_passive(m, d) as viewer:
             DZ = 5*1e-2
             left_x, left_y, right_x, right_y = xbox.read_value()
 
+
+
             #xdot = -1*deadzone(left_x,DZ)
             #ydot = deadzone(right_y,DZ)
             #zdot = -1*deadzone(left_y,DZ)
@@ -95,7 +102,8 @@ with mujoco.viewer.launch_passive(m, d) as viewer:
             zdot = deadzone(right_y,DZ)
             ydot = deadzone(left_y,DZ)
 
-
+            label.config(text=f"X-vel: {xdot:.2f}  Y-vel: {ydot:.2f}  Z-vel: {zdot:.2f}")
+            root.update()
 
 
             #dot_theta,Js_elias = rotoscrews.inv_kinematics(q[0],q[1],q[2],des_pith*2, des_tilt*2, des_rot*2)
