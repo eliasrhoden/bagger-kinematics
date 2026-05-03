@@ -6,4 +6,19 @@ Both are intended to run with an Xbox-controller plugged in and uses the MUJOCO 
 
 Both contains a special *robot_mode*, where one can control the end effector with fewer controls that a standard excavator.
 
+# Screw theory
 
+The model kinematics are handles with *screw theory* [https://en.wikipedia.org/wiki/Screw_theory](https://en.wikipedia.org/wiki/Screw_theory), more info about that can be found the the *modern robotics* book online [https://hades.mech.northwestern.edu/images/7/7f/MR.pdf](https://hades.mech.northwestern.edu/images/7/7f/MR.pdf).
+
+
+## Rototilt
+
+The urdf-file was put together manually and also the kinematic-screw model in `rotoscrews.py`
+
+The user inputs a desired pitch/tilt in *bucket-frame* and also a *global rotation*. Thus can you rotate the bucket without spilling.
+
+## Bagger 
+
+For the bagger, the URDF file was generated from fusion and also used for the screw models. (See `bagger_kinematics.py`)
+
+The bagger simply has linear velocity inputs, i.e. along global x,y,z axises. 
