@@ -7,13 +7,21 @@ import numpy as np
 import rotoscrews
 import read_xbox
 
-m = mujoco.MjModel.from_xml_path("rototilt.urdf")
+# Window to show ctrl-inputs
+import tkinter as tk
+root = tk.Tk()
+label = tk.Label(root, text="", font=("Courier", 16))
+label.pack()
+
+
+
+m = mujoco.MjModel.from_xml_path(r"rototilt\rototilt.urdf")
 d:mujoco.MjData = mujoco.MjData(m)
 
 xbox = read_xbox.Xbox()
 #xbox = read_xbox.DummyXbox()
 
-robot_mode = False
+robot_mode = True
 
 def read_3_angs_xbox():
 
@@ -61,6 +69,9 @@ with mujoco.viewer.launch_passive(m, d) as viewer:
 
         # Xbox inputs
         des_pith, des_tilt, des_rot = read_3_angs_xbox()
+
+        label.config(text=f"Pitch: {des_pith:.2f}  Tilt: {des_tilt:.2f}  Rot: {des_rot:.2f}")
+        root.update()
 
         # Inv kinematics or manual?
         if robot_mode:
