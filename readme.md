@@ -1,7 +1,3 @@
-
-
-
-
 # Bagger kinematics
 
 This contains two simulations, one for only the bucket and rototilt and the second for a complete excavator (including rototilt).
@@ -27,4 +23,6 @@ https://github.com/user-attachments/assets/27518317-51de-498c-8b93-5ab314ff5605
 
 For the bagger, the URDF file was generated from fusion and also used for the screw models. (See `bagger_kinematics.py`)
 
-The bagger simply has linear velocity inputs, i.e. along global x,y,z axises. 
+The bagger simply has linear velocity inputs, i.e. along global x,y,z axises.
+
+https://github.com/user-attachments/assets/8af81148-21c3-4dde-be9b-3ffc6247b197
