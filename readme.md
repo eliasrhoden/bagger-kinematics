@@ -10,6 +10,7 @@ Both contains a special *robot_mode*, where one can control the end effector wit
 
 The model kinematics are handles with *screw theory* [https://en.wikipedia.org/wiki/Screw_theory](https://en.wikipedia.org/wiki/Screw_theory), more info about that can be found the the *modern robotics* book online [https://hades.mech.northwestern.edu/images/7/7f/MR.pdf](https://hades.mech.northwestern.edu/images/7/7f/MR.pdf).
 
+Using the screws, it's possible to compute the *jacobian* than relates the bucket-velocities to the joint-velocities.
 
 ## Rototilt
 
