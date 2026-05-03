@@ -22,32 +22,6 @@ xbox = read_xbox.Xbox()
 
 robot_mode = True
 
-def read_3_angs_xbox():
-
-    left_x, left_y, right_x, right_y = xbox.read_value()
-
-    #des_rot = right_x
-    #des_pith = right_y 
-    #des_tilt = left_x
-
-    des_rot = left_x
-    des_pith = right_y 
-    des_tilt = right_x*-1
-
-    DZ = 5*1e-2
-
-    if np.abs(des_rot) < DZ:
-        des_rot = 0
-
-    if np.abs(des_pith) < DZ:
-        des_pith = 0
-
-
-    if np.abs(des_tilt) < DZ:
-        des_tilt = 0
-
-    return -1*des_pith, -1*des_tilt, des_rot*0.2
-
 def deadzone(value, dz):
 
     if np.abs(value) < dz:
@@ -92,12 +66,6 @@ with mujoco.viewer.launch_passive(m, d) as viewer:
             DZ = 5*1e-2
             left_x, left_y, right_x, right_y = xbox.read_value()
 
-
-
-            #xdot = -1*deadzone(left_x,DZ)
-            #ydot = deadzone(right_y,DZ)
-            #zdot = -1*deadzone(left_y,DZ)
-
             xdot = -1*deadzone(left_x,DZ)
             zdot = deadzone(right_y,DZ)
             ydot = deadzone(left_y,DZ)
@@ -105,16 +73,11 @@ with mujoco.viewer.launch_passive(m, d) as viewer:
             label.config(text=f"X-vel: {xdot:.2f}  Y-vel: {ydot:.2f}  Z-vel: {zdot:.2f}")
             root.update()
 
-
-            #dot_theta,Js_elias = rotoscrews.inv_kinematics(q[0],q[1],q[2],des_pith*2, des_tilt*2, des_rot*2)
-
             dot_theta,Js_elias = bagger_kinematics.tcp_linear(q, xdot, ydot, zdot)
             #dot_theta,Js_elias = bagger_kinematics.tcp_linear2(q, xdot, ydot, zdot, Js_muju)
 
             for i in range(len(dot_theta)):
                 q[i] += dot_theta[i]*1e-1*0.7
-
-
             
             err = np.abs(Js_muju - Js_elias)
             max_err = np.max(err)
@@ -133,7 +96,6 @@ with mujoco.viewer.launch_passive(m, d) as viewer:
 
                 #raise Exception("ERROR BETWEEN ELIAS AND MUJOCO")
 
-
         else:
             # Manual mode
             DZ = 5*1e-2
@@ -151,9 +113,6 @@ with mujoco.viewer.launch_passive(m, d) as viewer:
             # bucket pitch
             q[4] += -1*deadzone(right_x, DZ)*1e-2*1.5
             
-
-        #d.qpos[:] = q
-        #mujoco.mj_forward(m, d)
 
         # Pick up changes to the physics state, apply perturbations, update options from GUI.
         viewer.sync()
